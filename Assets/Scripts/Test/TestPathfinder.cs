@@ -2,31 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestPathfinder : Pathfinder
+public class TestPathfinder : MonoBehaviour
 {
+    [SerializeField] private GridManager gridManager;
     [SerializeField] private GridData start;
     [SerializeField] private GridData destination;
     [SerializeField] private Color color;
-    [SerializeField] private bool doSearch = false;
-
+    
     private void Update()
     {
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-        if(doSearch)
-        {
-            List<GridData> path = FindPath(start, destination);
-
-            foreach(GridData grid in path)
-            {
-                grid.GetComponent<Renderer>().material.SetColor("_Color", color);
-            }
-
-            doSearch = false;
-            start = null;
-            destination = null;
-        }
 
         if(Input.GetMouseButtonDown(0) && start == null)
         {
@@ -76,7 +62,15 @@ public class TestPathfinder : Pathfinder
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            doSearch = true;
+            List<GridData> path = Pathfinder.FindPath(gridManager.GetWalkableGrid(), start, destination);
+
+            foreach(GridData grid in path)
+            {
+                grid.GetComponent<Renderer>().material.SetColor("_Color", color);
+            }
+
+            start = null;
+            destination = null;
         }
     }
 }

@@ -5,12 +5,17 @@ using UnityEditor;
 
 public abstract class GridData : MonoBehaviour
 {
-    [SerializeField] private string gridName;
+    private static string gridName;
     [SerializeField] private Vector2 worldPos;
     [SerializeField] private Vector2 gridPos;
     [SerializeField] private List<GridData> neighbours;
     [SerializeField] private bool walkable = true;
 
+    public GridData(string name)
+    {
+        gridName = name;
+    }
+    
     public bool _walkable
     {
         get {return walkable; }
@@ -46,17 +51,17 @@ public abstract class GridData : MonoBehaviour
     protected internal virtual void Initialize()
     {
         #if UNITY_EDITOR
-        ChangeName();
         SetPos();
+        ChangeName();
         #endif
     }
 
-    protected internal void ChangeName()
+    private void ChangeName()
     {
-        this.gameObject.name = gridName + "_" + transform.GetSiblingIndex();
+        this.gameObject.name = gridName + " " + "(" + gridPos.x + ", " + gridPos.y + ")";
     }
 
-    protected internal void SetPos()
+    private void SetPos()
     {
         worldPos = new Vector2(transform.position.x, transform.position.z);
         gridPos = new Vector2(worldPos.x / 1.0f, worldPos.y / 1.0f);
