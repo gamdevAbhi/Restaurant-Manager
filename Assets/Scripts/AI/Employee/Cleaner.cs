@@ -4,23 +4,76 @@ using UnityEngine;
 
 public class Cleaner : Employee
 {
-    [SerializeField] private uint level;
-    [SerializeField] private bool doRandom;
+    [SerializeField] private DirtManager dirtManager;
+    [SerializeField] private Dirt job;
+
+    private void Awake()
+    {
+        currentGrid = gridManager.GetGridFromWorld(transform.position);
+        EmployeeData data = new EmployeeData();
+
+        data.gender = IdentityCreator.GetGender(70, 30);
+        data.employeeName = IdentityCreator.GetName(data.gender);
+        data.age = IdentityCreator.GetAge();
+
+        data = EmployeeCreator.CreateStat(1, this, data);
+        SetStat(data);
+    }
 
     private void Update()
     {
-        if(doRandom)
+        SetJob();
+
+        if(job != null)
         {
-            EmployeeData data = new EmployeeData();
+            if(job._effectedGrid == currentGrid)
+            {
+                DoJob();
+            }
+            else
+            {
+                bool doneGridMove = MoveTowards(path[0]);
+                if(doneGridMove)
+                {
+                    currentGrid = path[0];
+                    path.Remove(path[0]);
+                }
+            }
+        }
+    }
 
-            data.gender = IdentityCreator.GetGender(70, 30);
-            data.employeeName = IdentityCreator.GetName(data.gender);
-            data.age = IdentityCreator.GetAge();
+    private void DoJob()
+    {
+        float deltaTime = Time.deltaTime;
+        time = (time - deltaTime >= 0)? time - deltaTime : 0;
 
-            data = EmployeeCreator.CreateStat(level, this, data);
-            SetStat(data);
-            
-            doRandom = false;
+        if(time == 0)
+        {
+            int value = Random.Range((int)((float)_cleaning * 0.75f), (int)_cleaning + 1);
+
+            job.RemoveStain((uint)value);
+            time = 0.25f;
+        }
+    }
+
+    private void SetJob()
+    {
+        if(dirtManager._dirtList.Count > 0 && job == null)
+        {
+            for(int i = 0; i < dirtManager._dirtList.Count; i++)
+            {
+                List<GridData> newPath = Pathfinder.FindPath(gridManager.GetWalkableGrid(), currentGrid, dirtManager._dirtList[i]._effectedGrid);
+
+                if(newPath.Count > 0 || currentGrid == dirtManager._dirtList[i]._effectedGrid)
+                {
+                    if( dirtManager._dirtList[i].SetCleaner(this))
+                    {
+                        job = dirtManager._dirtList[i];
+                        path = newPath;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

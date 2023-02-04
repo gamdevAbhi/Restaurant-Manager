@@ -6,11 +6,17 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private List<GridData> gridList;
+    [SerializeField] private Vector2 worldToGrid = new Vector2(1, 1);
     [HideInInspector] [SerializeField] private bool shouldUpdate = false;
 
     public List<GridData> _gridList
     {
-        get { return gridList; }
+        get { return new List<GridData>(gridList); }
+    }
+
+    public Vector2 _worldToGrid
+    {
+        get { return worldToGrid; }
     }
 
     private void Update()
@@ -49,6 +55,23 @@ public class GridManager : MonoBehaviour
         {
             gridList.Add(grid);
         }
+    }
+
+    protected internal GridData GetGridFromWorld(Vector3 worldPos)
+    {
+        Vector2 worldGrid = new Vector2(Mathf.Round(worldPos.x), Mathf.Round(worldPos.z));
+
+        Vector2 gridLocation = worldGrid / worldToGrid;
+
+        foreach(GridData grid in gridList)
+        {
+            if(grid._gridPos == gridLocation)
+            {
+                return grid;
+            }
+        }
+
+        return null;
     }
 
     protected internal List<GridData> GetWalkableGrid()

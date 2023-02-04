@@ -6,7 +6,6 @@ using UnityEditor;
 public abstract class GridData : MonoBehaviour
 {
     private static string gridName;
-    [SerializeField] private Vector2 worldPos;
     [SerializeField] private Vector2 gridPos;
     [SerializeField] private List<GridData> neighbours;
     [SerializeField] private bool walkable = true;
@@ -63,8 +62,9 @@ public abstract class GridData : MonoBehaviour
 
     private void SetPos()
     {
-        worldPos = new Vector2(transform.position.x, transform.position.z);
-        gridPos = new Vector2(worldPos.x / 1.0f, worldPos.y / 1.0f);
+        Vector2 worldPos = new Vector2(transform.position.x, transform.position.z);
+        Vector2 worldToGrid = transform.parent.GetComponent<GridManager>()._worldToGrid;
+        gridPos = new Vector2(worldPos.x / worldToGrid.x, worldPos.y / worldToGrid.y);
     }
 
     protected internal void SetNeighbours(List<GridData> _neighbours)
