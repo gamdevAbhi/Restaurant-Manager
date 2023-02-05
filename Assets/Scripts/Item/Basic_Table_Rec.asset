@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f51717d3bbf34e46b869bbc02af16c7, type: 3}
+  m_Name: Basic_Table_Rec
+  m_EditorClassIdentifier: 
+  itemName: Basic_Table
+  itemType: 1
+  itemMesh: {fileID: 8040355495124938293, guid: 5d550e877cb6e7244b4604ef3c01ff7c, type: 3}
+  material: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  textureColor: {r: 0.9433962, g: 0.6559535, b: 0.32484868, a: 1}
+  objectTransform:
+    position: {x: 0, y: 0.3581568, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 1.28, y: 1, z: 1}
+  occupiedPos:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0.5}
+  - {x: 0, y: 0, z: -0.5}
+  - {x: 0.5, y: 0, z: 0}
+  - {x: -0.5, y: 0, z: 0}
+  - {x: 0.5, y: 0, z: 0.5}
+  - {x: 0.5, y: 0, z: -0.5}
+  - {x: -0.5, y: 0, z: 0.5}
+  - {x: -0.5, y: 0, z: -0.5}

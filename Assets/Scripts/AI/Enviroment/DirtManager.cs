@@ -25,7 +25,7 @@ public class DirtManager : MonoBehaviour
             int index = rand.Next(0, dirtableGrid.Count);
 
             Vector3 pos = dirtableGrid[index].transform.position;
-            pos.y = 0.2501f;
+            pos.y = 0.1251f;
 
             GameObject newDirtObject = Instantiate(dirt, pos, Quaternion.identity, transform);
             newDirtObject.transform.eulerAngles = new Vector3(90f, 0f, 0f);

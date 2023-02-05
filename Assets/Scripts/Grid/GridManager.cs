@@ -57,21 +57,24 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    protected internal GridData GetGridFromWorld(Vector3 worldPos)
+    protected internal GridData GetClosestGridFromWorld(Vector3 worldPos)
     {
-        Vector2 worldGrid = new Vector2(Mathf.Round(worldPos.x), Mathf.Round(worldPos.z));
+        float lowestMagnitude = float.MaxValue;
+        int index = -1;
 
-        Vector2 gridLocation = worldGrid / worldToGrid;
-
-        foreach(GridData grid in gridList)
+        for(int i = 0; i < gridList.Count; i++)
         {
-            if(grid._gridPos == gridLocation)
+            float magnitude = (gridList[i].transform.position - worldPos).magnitude;
+
+            if(lowestMagnitude > magnitude)
             {
-                return grid;
+                index = i;
+                lowestMagnitude = magnitude;
             }
         }
 
-        return null;
+        if(index > -1) return gridList[index];
+        else return null;
     }
 
     protected internal List<GridData> GetWalkableGrid()

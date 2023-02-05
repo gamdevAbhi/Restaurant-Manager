@@ -9,7 +9,9 @@ public class Cleaner : Employee
 
     private void Awake()
     {
-        currentGrid = gridManager.GetGridFromWorld(transform.position);
+        currentGrid = gridManager.GetClosestGridFromWorld(transform.position);
+        transform.position = new Vector3(currentGrid.transform.position.x, transform.position.y, currentGrid.transform.position.z);
+
         EmployeeData data = new EmployeeData();
 
         data.gender = IdentityCreator.GetGender(70, 30);
