@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Basic_Chair
   m_EditorClassIdentifier: 
   itemName: Basic_Chair
-  itemMesh: {fileID: 2286578240487128361, guid: 0d1b6282c0f81234e9a7a77388b30784, type: 3}
+  itemType: 0
+  itemScriptType: ChairItem
+  itemMesh: {fileID: 2286578240487128361, guid: 89b1dc822637a9945aff1bdd5680c6ee, type: 3}
   material: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   textureColor: {r: 0.94509804, g: 0.654902, b: 0.3254902, a: 1}
   objectTransform:
-    position: {x: 0, y: 0.478, z: 0}
-    rotation: {x: -90, y: 0, z: 90}
-    scale: {x: 1, y: 0.8, z: 1}
-  occupiedPos:
-  - {x: 0, y: 0, z: 0}
+    height: 0.5
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+  occupiedGridDistance:
+  - {x: 0, y: 0}

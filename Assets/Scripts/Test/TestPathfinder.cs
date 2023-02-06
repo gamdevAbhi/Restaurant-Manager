@@ -36,29 +36,29 @@ public class TestPathfinder : MonoBehaviour
             {
                 GridData obstacle = hit.transform.GetComponent<GridData>();
 
-                if(obstacle._walkable == true)
-                {
-                    obstacle.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
-                    obstacle._walkable = false;
-                }
-                else
-                {
-                    obstacle.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                    obstacle._walkable = true;
-                }
+                // if(obstacle._occupiedObject == true)
+                // {
+                //     obstacle.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+                //     obstacle._occupiedObject = false;
+                // }
+                // else
+                // {
+                //     obstacle.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                //     obstacle._occupiedObject = true;
+                // }
             }
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
             List<GridData> grids = gridManager._gridList;
 
-            foreach(GridData grid in grids)
-            {
-                if(grid._walkable == true)
-                {
-                    grid.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-                }
-            }
+            // foreach(GridData grid in grids)
+            // {
+            //     if(grid._occupiedObject == true)
+            //     {
+            //         grid.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+            //     }
+            // }
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {

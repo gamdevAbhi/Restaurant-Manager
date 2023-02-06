@@ -25,9 +25,10 @@ public class Item : MonoBehaviour
     {
         if(rotate)
         {
-            transform.GetChild(0).eulerAngles += new Vector3(0f, 90f, 0);
+            transform.eulerAngles += new Vector3(0f, 90f, 0);
             rotate = false; 
             SetOccupiedGrid();
+            gameObject.GetComponent<ItemScript>().CheckControlItem();
         }
     }
 
@@ -37,35 +38,39 @@ public class Item : MonoBehaviour
         itemType = item.itemType;
         GameObject emptyObject = new GameObject();
 
-        GameObject mesh = Instantiate(emptyObject, transform.position, Quaternion.identity, transform);
-        mesh.name = "Mesh";
-        mesh.transform.localPosition = item.objectTransform.position;
-        mesh.transform.localScale = item.objectTransform.scale;
-        mesh.transform.localEulerAngles = item.objectTransform.rotation;
+        transform.position = new Vector3(transform.position.x, item.objectTransform.height, transform.position.z);
+        transform.localScale = item.objectTransform.scale;
+        transform.eulerAngles = item.objectTransform.rotation;
 
-        MeshFilter meshFilter = mesh.AddComponent<MeshFilter>() as MeshFilter;
+        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>() as MeshFilter;
         meshFilter.mesh = item.itemMesh;
 
         Bounds bounds = meshFilter.sharedMesh.bounds;
 
-        BoxCollider collider = mesh.AddComponent<BoxCollider>();
+        BoxCollider collider = gameObject.AddComponent<BoxCollider>();
         collider.center = bounds.center;
         collider.size = new Vector3(bounds.size.x * 0.9f, bounds.size.y * 0.9f, bounds.size.z);
 
-        Renderer renderer = mesh.AddComponent<MeshRenderer>() as MeshRenderer;
+        Renderer renderer = gameObject.AddComponent<MeshRenderer>() as MeshRenderer;
         renderer.material = item.material;
         renderer.material.SetColor("_Color", item.textureColor);
 
-        Rigidbody rigid = gameObject.AddComponent<Rigidbody>() as Rigidbody;
-        rigid.useGravity = false;
-        rigid.constraints = RigidbodyConstraints.FreezeAll;
-
-        foreach(Vector3 grid in item.occupiedPos)
+        foreach(Vector2 grid in item.occupiedGridDistance)
         {
-            Instantiate(emptyObject, transform.position + grid, Quaternion.identity, mesh.transform);
+            Instantiate(emptyObject, transform.position + new Vector3(grid.x * gridManager._worldToGrid.x, 
+            0f, grid.y * gridManager._worldToGrid.y), Quaternion.identity, transform);
         }
 
         SetOccupiedGrid();
+        
+        if(item.itemScriptType != "")
+        {
+            System.Type type = System.Type.GetType(item.itemScriptType);
+            ItemScript itemScript = gameObject.AddComponent(type) as ItemScript;
+            itemScript.gridManager = gridManager;
+            itemScript.Initialize();
+            itemScript.CheckControlItem();
+        }
 
         Destroy(emptyObject);
     }
@@ -74,12 +79,12 @@ public class Item : MonoBehaviour
     {
         foreach(GridData grid in occupiedGrid)
         {
-            grid._walkable = true;
+            grid._occupiedObject = null;
         }
 
         occupiedGrid = new List<GridData>();
 
-        foreach(Transform trans in transform.GetChild(0))
+        foreach(Transform trans in transform)
         {
             GridData gridData = gridManager.GetClosestGridFromWorld(trans.position);
 
@@ -88,7 +93,7 @@ public class Item : MonoBehaviour
                 if(occupiedGrid.Contains(gridData) == false)
                 {
                     occupiedGrid.Add(gridData);
-                    gridData._walkable = false;
+                    gridData._occupiedObject = gameObject;
                 }
             }
         }

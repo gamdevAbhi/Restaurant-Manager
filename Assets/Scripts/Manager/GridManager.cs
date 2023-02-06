@@ -83,7 +83,7 @@ public class GridManager : MonoBehaviour
 
         foreach(GridData grid in gridList)
         {
-            if(grid._walkable == true)
+            if(grid._occupiedObject == null)
             {
                 walkableGrid.Add(grid);
             }

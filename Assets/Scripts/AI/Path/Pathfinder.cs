@@ -5,6 +5,8 @@ public static class Pathfinder
 {
     public static List<GridData> FindPath(List<GridData> gridList, GridData start, GridData destination)
     {
+        gridList.Add(start);
+        
         Dictionary<GridData, Node> node = new Dictionary<GridData, Node>();
         List<Node> closedNode = new List<Node>();
         List<Node> openNode = new List<Node>();

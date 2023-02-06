@@ -8,17 +8,17 @@ public abstract class GridData : MonoBehaviour
     private static string gridName;
     [SerializeField] private Vector2 gridPos;
     [SerializeField] private List<GridData> neighbours;
-    [SerializeField] private bool walkable = true;
+    [SerializeField] private GameObject occupiedObject;
 
     public GridData(string name)
     {
         gridName = name;
     }
     
-    public bool _walkable
+    public GameObject _occupiedObject
     {
-        get {return walkable; }
-        set {walkable = value; }
+        get { return occupiedObject; }
+        set { occupiedObject = value; }
     }
     
     public Vector2 _gridPos

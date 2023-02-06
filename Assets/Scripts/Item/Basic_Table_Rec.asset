@@ -14,20 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Basic_Table
   itemType: 1
-  itemMesh: {fileID: 8040355495124938293, guid: 5d550e877cb6e7244b4604ef3c01ff7c, type: 3}
+  itemScriptType: TableItem
+  itemMesh: {fileID: 8040355495124938293, guid: 77876e90882d76447abffb8f99ac880e, type: 3}
   material: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   textureColor: {r: 0.9433962, g: 0.6559535, b: 0.32484868, a: 1}
   objectTransform:
-    position: {x: 0, y: 0.3581568, z: 0}
-    rotation: {x: -90, y: 0, z: 0}
-    scale: {x: 1.28, y: 1, z: 1}
-  occupiedPos:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0.5}
-  - {x: 0, y: 0, z: -0.5}
-  - {x: 0.5, y: 0, z: 0}
-  - {x: -0.5, y: 0, z: 0}
-  - {x: 0.5, y: 0, z: 0.5}
-  - {x: 0.5, y: 0, z: -0.5}
-  - {x: -0.5, y: 0, z: 0.5}
-  - {x: -0.5, y: 0, z: -0.5}
+    height: 0.36
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 1.4, y: 1, z: 1.3}
+  occupiedGridDistance:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
+  - {x: 1, y: 1}
+  - {x: -1, y: 1}
+  - {x: 1, y: -1}
+  - {x: -1, y: -1}
