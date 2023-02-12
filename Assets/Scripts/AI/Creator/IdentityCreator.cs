@@ -58,7 +58,7 @@ public static class IdentityCreator
         System.Random rand = new System.Random();
         int value = rand.Next(0, 100);
 
-        if(value <= youngAge) return (uint)rand.Next(20, 28);
+        if(value <= youngAge) return (uint)rand.Next(17, 28);
         else if(value <= midAge) return (uint)rand.Next(28, 40);
         else return (uint)rand.Next(40, 60);
     }

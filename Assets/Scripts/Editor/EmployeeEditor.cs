@@ -17,7 +17,7 @@ public class EmployeeEditor : Editor
 
     private void OnEnable()
     {
-        employeeName = serializedObject.FindProperty("_employeeName");
+        employeeName = serializedObject.FindProperty("_humanName");
         age = serializedObject.FindProperty("_age");
         gender = serializedObject.FindProperty("_gender");
         speed = serializedObject.FindProperty("speed");

@@ -6,26 +6,26 @@ public class Cleaner : Employee
 {
     [SerializeField] private DirtManager dirtManager;
     [SerializeField] private Job job;
-    [SerializeField] private float waitingTime;
 
     private void Awake()
     {
         currentGrid = gridManager.GetClosestGridFromWorld(transform.position);
         currentGrid._occupiedObject = gameObject;
 
-        transform.position = new Vector3(currentGrid.transform.position.x, transform.position.y, currentGrid.transform.position.z);
+        transform.position = new Vector3(currentGrid.transform.position.x, 
+        transform.position.y, currentGrid.transform.position.z);
 
         EmployeeData data = new EmployeeData();
 
         data.gender = IdentityCreator.GetGender(70, 30);
-        data.employeeName = IdentityCreator.GetName(data.gender);
+        data.name = IdentityCreator.GetName(data.gender);
         data.age = IdentityCreator.GetAge();
 
         data = EmployeeCreator.CreateStat(1, this, data);
-        SetStat(data);
+        SetStat(typeof(EmployeeData), data);
 
         transform.parent = employeeManager.transform;
-        gameObject.name = data.employeeName + (" (Cleaner)");
+        gameObject.name = data.name + (" (Cleaner)");
     }
 
     private void Update()
@@ -75,16 +75,6 @@ public class Cleaner : Employee
         }
     }
 
-    private bool CheckIfPathAvailable()
-    {
-        if(path.Count > 1)
-        {
-            if(path[0]._occupiedObject != null && path[0]._occupiedObject != gameObject) return false;
-        }
-
-        return true;
-    }
-
     private void DoJob()
     {
         float deltaTime = Time.deltaTime;
@@ -105,7 +95,8 @@ public class Cleaner : Employee
         {
             for(int i = 0; i < dirtManager._dirtList.Count; i++)
             {
-                List<GridData> newPath = Pathfinder.FindPath(gridManager.GetWalkableGrid(), currentGrid, dirtManager._dirtList[i].effectedGrid);
+                List<GridData> newPath = Pathfinder.FindPath(gridManager.GetWalkableGrid(), 
+                currentGrid, dirtManager._dirtList[i].effectedGrid, true, false);
 
                 if(newPath.Count > 0 || currentGrid == dirtManager._dirtList[i].effectedGrid)
                 {
@@ -120,7 +111,8 @@ public class Cleaner : Employee
         }
         else if(currentJob != null)
         {
-            List<GridData> newPath = Pathfinder.FindPath(gridManager.GetWalkableGrid(), currentGrid, currentJob.effectedGrid);
+            List<GridData> newPath = Pathfinder.FindPath(gridManager.GetWalkableGrid(), 
+            currentGrid, currentJob.effectedGrid, true, false);
 
             if(newPath.Count > 0 || currentGrid == currentJob.effectedGrid)
              {

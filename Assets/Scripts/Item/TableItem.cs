@@ -24,6 +24,10 @@ public class TableItem : ItemScript
 
     protected internal override void CheckControlItem()
     {
-        
+        for(int i = 0; i < controlItem.Length; i++)
+        {
+            if(controlItem[i] == null) continue;
+            if(controlItem[i].GetComponent<ChairItem>().controlItem[0] != GetComponent<Item>()) controlItem[i] = null;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,10 +32,12 @@ public abstract class Employee : Human
         get { return service; }
     }
 
-    protected internal override void SetStat(EmployeeData data)
+    protected internal override void SetStat(Type type, System.Object newData)
     {
-        base.SetStat(data);
+        EmployeeData data  = (EmployeeData)Convert.ChangeType(newData, type);
 
+        SetInfo(data.name, data.age, data.gender);
+        
         speed = data.speed;
         cleaning = data.cleaning;
         cooking = data.cooking;

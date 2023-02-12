@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,22 +8,25 @@ public abstract class Human : MonoBehaviour
     [SerializeField] protected internal GridManager gridManager;
     [SerializeField] protected internal GridData currentGrid;
     protected internal List<GridData> path;
+    protected internal float waitingTime;
 
-    [SerializeField] private static string employeeName;
+    [SerializeField] private static string humanName;
     [SerializeField] private static uint age;
     [SerializeField] private static bool gender;
 
-    [HideInInspector] public string _employeeName;
+    [HideInInspector] public string _humanName;
     [HideInInspector] public uint _age;
     [HideInInspector] public bool _gender;
 
-    protected internal virtual void SetStat(EmployeeData data)
-    {
-        employeeName = data.employeeName;
-        age = data.age;
-        gender = data.gender;
+    protected internal abstract void SetStat(Type type, System.Object newData);
 
-        _employeeName = employeeName;
+    protected internal void SetInfo(string name, uint age_, bool gender_)
+    {
+        humanName = name;
+        age = age_;
+        gender = gender_;
+
+        _humanName = humanName;
         _age = age;
         _gender = gender;
     }
@@ -44,5 +48,15 @@ public abstract class Human : MonoBehaviour
             transform.position += movement;
             return false;
         }
+    }
+
+    protected internal bool CheckIfPathAvailable()
+    {
+        if(path.Count > 1)
+        {
+            if(path[0]._occupiedObject != null && path[0]._occupiedObject != gameObject) return false;
+        }
+
+        return true;
     }
 }

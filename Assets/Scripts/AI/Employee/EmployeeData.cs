@@ -1,13 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class EmployeeData
+public class EmployeeData : Data
 {
-    public string employeeName;
-    public uint age;
-    public bool gender;
-
     public uint speed;
     public uint cleaning;
     public uint cooking;

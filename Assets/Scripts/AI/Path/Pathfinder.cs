@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public static class Pathfinder
 {
-    public static List<GridData> FindPath(List<GridData> gridList, GridData start, GridData destination)
+    public static List<GridData> FindPath(List<GridData> gridList, GridData start, GridData destination, bool addStart, bool addEnd)
     {
-        gridList.Add(start);
-        
+        if(addStart) gridList.Add(start);
+        if(addEnd) gridList.Add(destination);
+
         Dictionary<GridData, Node> node = new Dictionary<GridData, Node>();
         List<Node> closedNode = new List<Node>();
         List<Node> openNode = new List<Node>();

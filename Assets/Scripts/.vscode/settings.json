@@ -1,2 +1,9 @@
 {
+    "workbench.colorTheme": "JetBrains Rider Dark Theme",
+    "workbench.iconTheme": "helium-icon-theme",
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.lineHeight": 22,
+    "editor.fontWeight": 300
 }

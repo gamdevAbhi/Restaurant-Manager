@@ -62,7 +62,7 @@ public class TestPathfinder : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            List<GridData> path = Pathfinder.FindPath(gridManager.GetWalkableGrid(), start, destination);
+            List<GridData> path = Pathfinder.FindPath(gridManager.GetWalkableGrid(), start, destination, false, false);
 
             foreach(GridData grid in path)
             {

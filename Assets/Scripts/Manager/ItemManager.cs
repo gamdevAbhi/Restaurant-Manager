@@ -44,6 +44,11 @@ public class ItemManager : MonoBehaviour
 
         return -1;
     }
+
+    protected internal List<Item> FindItem(ItemObject.ItemType itemType)
+    {
+        return itemList[FindItemTypeToItems(itemType)].items;
+    }
 }
 
 [System.Serializable]
