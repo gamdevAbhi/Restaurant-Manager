@@ -10,7 +10,6 @@ public class Cleaner : Employee
     private void Awake()
     {
         currentGrid = gridManager.GetClosestGridFromWorld(transform.position);
-        currentGrid._occupiedObject = gameObject;
 
         transform.position = new Vector3(currentGrid.transform.position.x, 
         transform.position.y, currentGrid.transform.position.z);
@@ -21,6 +20,9 @@ public class Cleaner : Employee
         data.name = IdentityCreator.GetName(data.gender);
         data.age = IdentityCreator.GetAge();
 
+        data = (EmployeeData)IdentityCreator.GetRandomAppearance(data);
+        SetTex(data.skinTex, data.headTex, data.handTex, data.bodyTex, data.legTex);
+        
         data = EmployeeCreator.CreateStat(1, this, data);
         SetStat(typeof(EmployeeData), data);
 
@@ -30,10 +32,6 @@ public class Cleaner : Employee
 
     private void Update()
     {
-        currentGrid._occupiedObject = null;
-        currentGrid = gridManager.GetClosestGridFromWorld(transform.position);
-        currentGrid._occupiedObject = gameObject;
-
         SetJob(null);
 
         if(job != null)

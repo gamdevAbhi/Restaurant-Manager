@@ -8,13 +8,15 @@ public class ItemObject : ScriptableObject
     public string itemName;
     public enum ItemType { chair, table};
     public ItemType itemType;
-    public string itemScriptType;
     public Mesh itemMesh;
     public Material material;
     public Color textureColor = Color.white;
 
     public ObjectTransform objectTransform;
     public Vector2[] occupiedGridDistance;
+    
+    public Vector2[] controlGridItem;
+    public int controlItem;
 }
 
 [System.Serializable]

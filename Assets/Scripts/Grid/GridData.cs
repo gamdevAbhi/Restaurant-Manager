@@ -18,7 +18,6 @@ public abstract class GridData : MonoBehaviour
     public GameObject _occupiedObject
     {
         get { return occupiedObject; }
-        set { occupiedObject = value; }
     }
     
     public Vector2 _gridPos
@@ -75,5 +74,21 @@ public abstract class GridData : MonoBehaviour
     protected internal void Save()
     {
         PrefabUtility.RecordPrefabInstancePropertyModifications(this);
+    }
+
+    private void OnCollisionStay(Collision other) 
+    {
+        if(occupiedObject == null)
+        {
+            occupiedObject = other.gameObject;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if(occupiedObject == other.gameObject)
+        {
+            occupiedObject = null;
+        }
     }
 }

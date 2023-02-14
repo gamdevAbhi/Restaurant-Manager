@@ -20,7 +20,7 @@ public static class Pathfinder
 
         foreach(GridData data in gridList)
         {
-            node.Add(data, new Node(data));
+            if(node.ContainsKey(data) == false) node.Add(data, new Node(data));
         }
 
         node[start].g = 0;

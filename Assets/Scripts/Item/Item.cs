@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     public ItemObject item;
     public ItemObject.ItemType itemType;
     public GridManager gridManager;
     public ItemManager itemManager;
-    public List<GridData> occupiedGrid;
+    public GridData[] occupiedGrid;
     public bool rotate;
+
+    [SerializeField] protected internal Vector2[] controlGridItem;
+    [SerializeField] protected internal Item[] controlItem;
+
+    protected internal abstract void Initialize();
+    protected internal abstract void CheckControlItem();
+    //protected internal abstract void CheckControlHuman();
 
     private void Awake()
     {
@@ -21,14 +28,18 @@ public class Item : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected internal virtual void Update()
+    {
+        CheckRotation();
+        CheckControlItem();
+    }
+
+    private void CheckRotation()
     {
         if(rotate)
         {
             transform.eulerAngles += new Vector3(0f, 90f, 0);
             rotate = false; 
-            SetOccupiedGrid();
-            gameObject.GetComponent<ItemScript>().CheckControlItem();
         }
     }
 
@@ -42,7 +53,7 @@ public class Item : MonoBehaviour
         transform.localScale = item.objectTransform.scale;
         transform.eulerAngles = item.objectTransform.rotation;
 
-        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>() as MeshFilter;
+        MeshFilter meshFilter = gameObject.GetComponent<MeshFilter>();
         meshFilter.mesh = item.itemMesh;
 
         Bounds bounds = meshFilter.sharedMesh.bounds;
@@ -51,7 +62,7 @@ public class Item : MonoBehaviour
         collider.center = bounds.center;
         collider.size = new Vector3(bounds.size.x * 0.9f, bounds.size.y * 0.9f, bounds.size.z);
 
-        Renderer renderer = gameObject.AddComponent<MeshRenderer>() as MeshRenderer;
+        Renderer renderer = gameObject.GetComponent<MeshRenderer>();
         renderer.material = item.material;
         renderer.material.SetColor("_Color", item.textureColor);
 
@@ -61,41 +72,64 @@ public class Item : MonoBehaviour
             0f, grid.y * gridManager._worldToGrid.y), Quaternion.identity, transform);
         }
 
-        SetOccupiedGrid();
-        
-        if(item.itemScriptType != "")
-        {
-            System.Type type = System.Type.GetType(item.itemScriptType);
-            ItemScript itemScript = gameObject.AddComponent(type) as ItemScript;
-            itemScript.gridManager = gridManager;
-            itemScript.Initialize();
-            itemScript.CheckControlItem();
-        }
+        //SetOccupiedGrid();
+
+        Initialize();
+        CheckControlItem();
 
         Destroy(emptyObject);
     }
 
-    private void SetOccupiedGrid()
+    protected internal bool CheckElement(GridData grid)
     {
-        foreach(GridData grid in occupiedGrid)
+        for (int i = 0; i < occupiedGrid.Length; i++)
         {
-            grid._occupiedObject = null;
+            if(occupiedGrid[i] == grid) return true;
         }
+        
+        return false;
+    }
 
-        occupiedGrid = new List<GridData>();
-
-        foreach(Transform trans in transform)
+    private int FindElement(GridData grid)
+    {
+        for (int i = 0; i < occupiedGrid.Length; i++)
         {
-            GridData gridData = gridManager.GetClosestGridFromWorld(trans.position);
+            if(occupiedGrid[i] == grid) return i;
+        }
+        
+        return -1;
+    }
 
-            if(gridData != null)
+    private void OnCollisionStay(Collision other) 
+    {
+        try
+        {
+            GridData grid = other.gameObject.GetComponent<GridData>();
+
+            if(CheckElement(grid) == false)
             {
-                if(occupiedGrid.Contains(gridData) == false)
-                {
-                    occupiedGrid.Add(gridData);
-                    gridData._occupiedObject = gameObject;
-                }
+                int index = FindElement(null);
+                if(index == -1) return; 
+
+                occupiedGrid[index] = grid;
             }
         }
+        catch {}
+    }
+
+    private void OnCollisionExit(Collision other) 
+    {
+        try
+        {
+            GridData grid = other.gameObject.GetComponent<GridData>();
+
+             if(CheckElement(grid) == true)
+            {
+                int index = FindElement(grid); 
+                
+                occupiedGrid[index] = null;
+            }
+        }
+        catch {}
     }
 }

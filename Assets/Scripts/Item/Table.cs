@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TableItem : ItemScript
+public class Table : Item
 {
     protected internal override void Initialize()
     {
         controlGridItem = new Vector2[0] {};
-        controlGridHuman = new Vector2[0] {};
         controlItem = new Item[4] {null, null, null, null};
-        controlHuman = new Human[0] {};
     }
 
     protected internal int ReturnFreeIndex()
@@ -27,7 +25,7 @@ public class TableItem : ItemScript
         for(int i = 0; i < controlItem.Length; i++)
         {
             if(controlItem[i] == null) continue;
-            if(controlItem[i].GetComponent<ChairItem>().controlItem[0] != GetComponent<Item>()) controlItem[i] = null;
+            if(controlItem[i].GetComponent<Chair>().controlItem[0] != GetComponent<Item>()) controlItem[i] = null;
         }
     }
 }

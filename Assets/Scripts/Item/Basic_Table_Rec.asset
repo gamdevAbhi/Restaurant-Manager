@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Basic_Table
   itemType: 1
-  itemScriptType: TableItem
   itemMesh: {fileID: 8040355495124938293, guid: 77876e90882d76447abffb8f99ac880e, type: 3}
   material: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   textureColor: {r: 0.9433962, g: 0.6559535, b: 0.32484868, a: 1}
@@ -32,3 +31,5 @@ MonoBehaviour:
   - {x: -1, y: 1}
   - {x: 1, y: -1}
   - {x: -1, y: -1}
+  controlGridItem: []
+  controlItem: 4

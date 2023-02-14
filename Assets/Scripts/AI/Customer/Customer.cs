@@ -18,7 +18,6 @@ public class Customer : Human
     private void Awake()
     {
         currentGrid = gridManager.GetClosestGridFromWorld(transform.position);
-        currentGrid._occupiedObject = gameObject;
 
         transform.position = new Vector3(currentGrid.transform.position.x, 
         transform.position.y, currentGrid.transform.position.z);
@@ -38,10 +37,6 @@ public class Customer : Human
 
     private void Update()
     {
-        currentGrid._occupiedObject = null;
-        currentGrid = gridManager.GetClosestGridFromWorld(transform.position);
-        currentGrid._occupiedObject = gameObject;
-
         FindActivity(null);
 
         if(activityItem != null)
@@ -83,16 +78,16 @@ public class Customer : Human
 
             foreach(Item table in tables)
             {
-                Item[] chairs = table.GetComponent<TableItem>().controlItem;
+                Item[] chairs = table.controlItem;
 
-                foreach(Item chair in chairs)
+                foreach(Chair chair in chairs)
                 {
                     if(chair == null)
                     {
                         continue;
                     }
                     
-                    if(chair.GetComponent<ChairItem>().controlHuman[0] == null)
+                    if(chair.user == null)
                     {
                         GridData grid = chair.occupiedGrid[0];
 
@@ -104,7 +99,7 @@ public class Customer : Human
                         {
                             path = newPath;
                             activityItem = chair;
-                            chair.GetComponent<ChairItem>().controlHuman[0] = this;
+                            chair.user = this;
                             break;
                         }
                     }

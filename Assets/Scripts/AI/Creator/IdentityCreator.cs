@@ -1,32 +1,55 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public static class IdentityCreator
 {
-    private static string maleFirstNameDir = "Text/MaleFirstNames";
-    private static string femaleFirstNameDir = "Text/FemaleFirstNames";
-    private static string surnamesDir = "Text/Surnames";
+    private static string maleFirstNameDir = "Names/MaleFirstNames";
+    private static string femaleFirstNameDir = "Names/FemaleFirstNames";
+    private static string surnamesDir = "Names/Surnames";
 
-    public static string GetName(bool gender)
+    private static string[] firstNamesMale;
+    private static string[] firstNamesFemale;
+    private static string[] surnames;
+
+    private static Dictionary<string, string> humanTexPath = new Dictionary<string, string>() 
     {
+        {"Head", "Head/"}, {"Body", "Body/"}, {"Hand", "Hand/"}, {"Leg", "Leg/"}, {"Shoe", "Shoe/"},
+        {"Pattern", "Pattern/"}, {"Skin", "Skin/"}
+    };
+
+    public static string GetName(bool gender) 
+    {
+        GetRandomAppearance(new EmployeeData());
+
+        if(firstNamesMale == null) firstNamesMale = AssetToNames(maleFirstNameDir);
+        if(firstNamesFemale == null) firstNamesFemale = AssetToNames(femaleFirstNameDir);
+        if(surnames == null) surnames = AssetToNames(surnamesDir);
+
         if(gender)
         {
-            return GetRandomLine(Resources.Load<TextAsset>(maleFirstNameDir)) + " " + GetRandomLine(Resources.Load<TextAsset>(surnamesDir));
+            return GetRandomLine(firstNamesMale) + " " + GetRandomLine(surnames);
         }
         else
         {
-            return GetRandomLine(Resources.Load<TextAsset>(femaleFirstNameDir)) + " " + GetRandomLine(Resources.Load<TextAsset>(surnamesDir));
+            return GetRandomLine(firstNamesFemale) + " " + GetRandomLine(surnames);
         }
     }
 
-    private static string GetRandomLine(TextAsset asset)
+    private static string[] AssetToNames(string path)
+    {
+        TextAsset asset = Resources.Load<TextAsset>(path);
+
+        if(asset == null) return new string[0];
+
+        string[] output = asset.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+        Resources.UnloadAsset(asset);
+        return output;
+    }
+
+    private static string GetRandomLine(string[] words)
     {
         System.Random rand = new System.Random();
-
-        string[] words = asset.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
         int line = rand.Next(0, words.Length);
 
@@ -61,5 +84,36 @@ public static class IdentityCreator
         if(value <= youngAge) return (uint)rand.Next(17, 28);
         else if(value <= midAge) return (uint)rand.Next(28, 40);
         else return (uint)rand.Next(40, 60);
+    }
+
+    public static Data GetRandomAppearance(Data data)
+    {
+        List<string> availableTex = new List<string>();
+        System.Random rand = new System.Random();
+
+        AddTex(availableTex, "Skin", "Both");
+
+        if(data.gender)
+        {
+            AddTex(availableTex, "Skin", "Male");
+        }
+        else
+        {
+            AddTex(availableTex, "Skin", "Female");
+        }
+
+        data.skinTex = Resources.Load<HumanTex>("Skin/" + availableTex[rand.Next(availableTex.Count)]);
+
+        return data;
+    }
+
+    private static void AddTex(List<string> texList, string partName, string fileName)
+    {
+        if(humanTexPath.ContainsKey(partName) == false) return;
+
+        foreach(string texName in AssetToNames(humanTexPath[partName] + fileName))
+        {
+            texList.Add(texName);
+        }
     }
 }
