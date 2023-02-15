@@ -11,14 +11,9 @@ public abstract class Item : MonoBehaviour
     public GridData[] occupiedGrid;
     public bool rotate;
 
-    [SerializeField] protected internal Vector2[] controlGridItem;
-    [SerializeField] protected internal Item[] controlItem;
-
     protected internal abstract void Initialize();
-    protected internal abstract void CheckControlItem();
-    //protected internal abstract void CheckControlHuman();
 
-    private void Awake()
+    protected internal virtual void Awake()
     {
         transform.parent = itemManager.transform;
 
@@ -31,7 +26,6 @@ public abstract class Item : MonoBehaviour
     protected internal virtual void Update()
     {
         CheckRotation();
-        CheckControlItem();
     }
 
     private void CheckRotation()
@@ -47,7 +41,6 @@ public abstract class Item : MonoBehaviour
     {
         gameObject.name = item.itemName;
         itemType = item.itemType;
-        GameObject emptyObject = new GameObject();
 
         transform.position = new Vector3(transform.position.x, item.objectTransform.height, transform.position.z);
         transform.localScale = item.objectTransform.scale;
@@ -66,18 +59,7 @@ public abstract class Item : MonoBehaviour
         renderer.material = item.material;
         renderer.material.SetColor("_Color", item.textureColor);
 
-        foreach(Vector2 grid in item.occupiedGridDistance)
-        {
-            Instantiate(emptyObject, transform.position + new Vector3(grid.x * gridManager._worldToGrid.x, 
-            0f, grid.y * gridManager._worldToGrid.y), Quaternion.identity, transform);
-        }
-
-        //SetOccupiedGrid();
-
         Initialize();
-        CheckControlItem();
-
-        Destroy(emptyObject);
     }
 
     protected internal bool CheckElement(GridData grid)

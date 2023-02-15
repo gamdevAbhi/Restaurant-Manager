@@ -74,11 +74,11 @@ public class Customer : Human
     {
         if(item == null && activityItem == null)
         {
-            List<Item> tables = itemManager.FindItem(ItemObject.ItemType.table);
+            List<Item> tables = itemManager.FindItem(ItemObject.ItemType.Table);
 
-            foreach(Item table in tables)
+            foreach(Table table in tables)
             {
-                Item[] chairs = table.controlItem;
+                Chair[] chairs = table.chair;
 
                 foreach(Chair chair in chairs)
                 {
@@ -87,7 +87,7 @@ public class Customer : Human
                         continue;
                     }
                     
-                    if(chair.user == null)
+                    if(chair.ChairIsFree())
                     {
                         GridData grid = chair.occupiedGrid[0];
 
@@ -99,7 +99,7 @@ public class Customer : Human
                         {
                             path = newPath;
                             activityItem = chair;
-                            chair.user = this;
+                            chair.customer[chair.ChairFreeIndex()] = this;
                             break;
                         }
                     }

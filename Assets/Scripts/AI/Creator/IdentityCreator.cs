@@ -102,8 +102,9 @@ public static class IdentityCreator
             AddTex(availableTex, "Skin", "Female");
         }
 
-        data.skinTex = Resources.Load<HumanTex>("Skin/" + availableTex[rand.Next(availableTex.Count)]);
-
+        HumanTex skinTex = Resources.Load<HumanTex>("Skin/" + availableTex[rand.Next(availableTex.Count)]);
+        data.skinTex = skinTex;
+        
         return data;
     }
 

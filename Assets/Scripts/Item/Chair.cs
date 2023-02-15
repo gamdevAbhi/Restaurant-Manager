@@ -4,47 +4,97 @@ using UnityEngine;
 
 public class Chair : Item
 {
-    [SerializeField] protected internal Human user;
+    [SerializeField] protected internal Table table;
+    [SerializeField] protected internal Customer[] customer;
+
+    protected internal override void Update()
+    {
+        base.Update();
+
+        CheckControlItem();
+    }
 
     protected internal override void Initialize()
     {
-        controlGridItem = new Vector2[1] {new Vector2(gridManager._worldToGrid.x * 1f, 0f)};
-        controlItem = new Item[1] {null};
+        ChairStat stat = item.stat as ChairStat;
+
+        table = null;
+
+        customer = new Customer[stat.GetCapacitySize(stat.capacity)];
+
+        CheckControlItem();
     }
 
-    protected internal override void CheckControlItem()
+    protected internal void CheckControlItem()
     {
-        GameObject obj = new GameObject();
-        obj.transform.parent = transform;
-        obj.transform.localPosition = Vector3.zero;
-        obj.transform.localPosition += new Vector3(controlGridItem[0].x, 0f, controlGridItem[0].y);
+        table = null;
+        Table currentTable = null;
 
-        GridData grid = gridManager.GetClosestGridFromWorld(obj.transform.position);
-
-        if(grid != null)
+        foreach(GridData _grid in occupiedGrid)
         {
-            try
-            {
-                if(grid._occupiedObject.GetComponent<Item>().itemType == ItemObject.ItemType.table)
-                {
-                    controlItem[0] = grid._occupiedObject.GetComponent<Item>();
-                    Table table = controlItem[0] as Table;
+            if(_grid == null) return;
 
-                    foreach(Chair chair in table.controlItem)
-                    {
-                        if(chair == this) return;
-                    }
+            GameObject obj = new GameObject();
+            obj.transform.parent = transform;
+            obj.transform.position = _grid.transform.position;
 
-                    int index = grid._occupiedObject.GetComponent<Table>().ReturnFreeIndex();
-                    grid._occupiedObject.GetComponent<Item>().controlItem[index] = this;
-                }
-            }
-            catch
+            obj.transform.localPosition += new Vector3(gridManager._worldToGrid.x * 1f, 0f, 0f);
+
+            GridData grid = gridManager.GetClosestGridFromWorld(obj.transform.position);
+            Destroy(obj);
+
+            if(grid == null) return;
+            if(grid._occupiedObject == null) return;
+            if(grid._occupiedObject.GetComponents<Item>().Length == 0) return;
+
+            if(grid._occupiedObject.GetComponent<Item>().itemType == ItemObject.ItemType.Table)
             {
-                controlItem[0] = null;
+                if(currentTable != null && currentTable != grid._occupiedObject.GetComponent<Table>()) return;
+
+                currentTable = grid._occupiedObject.GetComponent<Table>();
             }
+            else return;
         }
 
-        Destroy(obj);
+        foreach(Chair chair in currentTable.chair)
+        {
+            if(chair == this)
+            {
+                table = currentTable;
+                return;
+            }
+        }
+        
+        int index = currentTable.ReturnFreeIndex();
+
+        if(index > -1)
+        {
+            currentTable.chair[index] = this;
+            table = currentTable;
+        }
+    }
+
+    protected internal bool ChairIsFree()
+    {
+        foreach(Customer cus in customer)
+        {
+            if(cus == null) return true;
+        }
+
+        return false;
+    }
+
+    protected internal int ChairFreeIndex()
+    {
+        if(ChairIsFree() == false) return -1;
+        else
+        {
+            for(int i = 0; i < customer.Length; i++)
+            {
+                if(customer[i] == null) return i;
+            }
+
+            return -1;
+        }
     }
 }
