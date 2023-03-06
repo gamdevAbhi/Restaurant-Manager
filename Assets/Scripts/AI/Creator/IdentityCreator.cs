@@ -85,7 +85,7 @@ public static class IdentityCreator
         else if(value <= midAge) return (uint)rand.Next(28, 40);
         else return (uint)rand.Next(40, 60);
     }
-
+// new
     public static Data GetRandomAppearance(Data data)
     {
         List<string> availableTex = new List<string>();

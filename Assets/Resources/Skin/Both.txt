@@ -1,4 +1,0 @@
-Dark_Skin
-Light_Skin
-Super_Dark_Skin
-Super_Light_Skin

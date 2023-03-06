@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e4d7bc6bb6d444485ab0aeb0ef7fd9, type: 3}
+  m_Name: hand_01
+  m_EditorClassIdentifier: 
+  texName: V Shaped
+  texture: {fileID: 2800000, guid: 7f57f9f9c200b77429acc9fd375d15ac, type: 3}
+  color:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  - {r: 0.6792453, g: 0.24670699, b: 0.24670699, a: 1}
+  - {r: 0.33107865, g: 0.51072407, b: 0.754717, a: 1}
+  - {r: 0.32941177, g: 0.7529412, b: 0.40837127, a: 1}
+  - {r: 0.7529412, g: 0.70679694, b: 0.32941177, a: 1}
+  - {r: 0.8301887, g: 0.3586647, b: 0.23887502, a: 1}
+  handPattern: []

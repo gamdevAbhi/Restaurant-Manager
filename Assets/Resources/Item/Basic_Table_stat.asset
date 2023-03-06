@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 993aafc5796559a46aace2070ee55ad9, type: 3}
   m_Name: Basic_Table_stat
-  m_EditorClassIdentifier: Assembly-CSharp::TableStat
+  m_EditorClassIdentifier: 
   capacity: 3

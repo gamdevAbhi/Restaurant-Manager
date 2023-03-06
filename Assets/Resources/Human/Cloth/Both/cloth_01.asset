@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8f8791e32744b468a5af2bbcd93510, type: 3}
+  m_Name: cloth_01
+  m_EditorClassIdentifier: 
+  texName: Full Shaped
+  texture: {fileID: 2800000, guid: 1fb0d45c323a0cd47bdc3a91b13b2994, type: 3}
+  color:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  - {r: 0.6792453, g: 0.24670699, b: 0.24670699, a: 1}
+  - {r: 0.33107865, g: 0.51072407, b: 0.754717, a: 1}
+  - {r: 0.32941177, g: 0.7529412, b: 0.40837127, a: 1}
+  - {r: 0.7529412, g: 0.70679694, b: 0.32941177, a: 1}
+  - {r: 0.8301887, g: 0.3586647, b: 0.23887502, a: 1}
+  clothType:
+  - texture: {fileID: 2800000, guid: 79930964383d5e24f84ccafe9a230ffd, type: 3}
+    color:
+    - {r: 1, g: 1, b: 1, a: 1}
+    patternAllowed: 1
+  - texture: {fileID: 2800000, guid: 33301a7f1f53af14fa19e3b56af6186e, type: 3}
+    color:
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+    - {r: 0.6792453, g: 0.24670699, b: 0.24670699, a: 1}
+    - {r: 0.33107865, g: 0.51072407, b: 0.754717, a: 1}
+    - {r: 0.32941177, g: 0.7529412, b: 0.40837127, a: 1}
+    - {r: 0.7529412, g: 0.70679694, b: 0.32941177, a: 1}
+    - {r: 0.8301887, g: 0.3586647, b: 0.23887502, a: 1}
+    patternAllowed: 0
+  - texture: {fileID: 2800000, guid: 4c79acc63610e67449e266210b4ce086, type: 3}
+    color:
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+    - {r: 0.6792453, g: 0.24670699, b: 0.24670699, a: 1}
+    - {r: 0.33107865, g: 0.51072407, b: 0.754717, a: 1}
+    - {r: 0.32941177, g: 0.7529412, b: 0.40837127, a: 1}
+    - {r: 0.7529412, g: 0.70679694, b: 0.32941177, a: 1}
+    - {r: 0.8301887, g: 0.3586647, b: 0.23887502, a: 1}
+    patternAllowed: 0
+  - texture: {fileID: 2800000, guid: bea0619b5e4c35945b82b1e4491d64dd, type: 3}
+    color:
+    - {r: 1, g: 1, b: 1, a: 1}
+    patternAllowed: 0
+  - texture: {fileID: 2800000, guid: 43497b229071ce243bef1baa2f6690dd, type: 3}
+    color:
+    - {r: 1, g: 1, b: 1, a: 1}
+    patternAllowed: 1
+  - texture: {fileID: 2800000, guid: 404080b8c59c6a54095ebd626334d8e7, type: 3}
+    color:
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+    - {r: 0.6792453, g: 0.24670699, b: 0.24670699, a: 1}
+    - {r: 0.33107865, g: 0.51072407, b: 0.754717, a: 1}
+    - {r: 0.32941177, g: 0.7529412, b: 0.40837127, a: 1}
+    - {r: 0.7529412, g: 0.70679694, b: 0.32941177, a: 1}
+    - {r: 0.8301887, g: 0.3586647, b: 0.23887502, a: 1}
+    patternAllowed: 1
+  clothPattern:
+  - {fileID: 2800000, guid: f343bad5a0698f44787ebb5a159b96e4, type: 3}
+  - {fileID: 2800000, guid: 2f3f3d84f34fcd84d9b5f8aa1690c569, type: 3}
+  - {fileID: 2800000, guid: 28eea56f68d95f34db9786f9ecfa0da1, type: 3}
+  - {fileID: 2800000, guid: c11544f6dd9870d45a7bfb6e2fe1974c, type: 3}
+  - {fileID: 2800000, guid: 22a7e82a3f06f344282265e80f0547eb, type: 3}
+  - {fileID: 2800000, guid: 641dbcc680680aa46ae93cdacf1d79a9, type: 3}
