@@ -23,6 +23,7 @@ MonoBehaviour:
     handManager: {fileID: 0}
     legManager: {fileID: 11400000, guid: c351077583f2b3f4ca7b33116f70c0db, type: 2}
     shoeManager: {fileID: 0}
+    hairManager: {fileID: 11400000, guid: 0bd3ce11e5f01934093d7d53c19879da, type: 2}
   femaleTex:
     eyebrowManager: {fileID: 11400000, guid: 6871602e464f37e4abb640b0e5022ad4, type: 2}
     eyeManager: {fileID: 11400000, guid: 4eaa2b2ab35a99a43a5b47e8304efb39, type: 2}
@@ -33,6 +34,7 @@ MonoBehaviour:
     handManager: {fileID: 11400000, guid: 133675cb9a4f5224085814e0f1b6a4e9, type: 2}
     legManager: {fileID: 11400000, guid: 23e050a2bc29cf44e84dce30f92b18ac, type: 2}
     shoeManager: {fileID: 0}
+    hairManager: {fileID: 11400000, guid: b45cb4c30edd3094c8b6bb5de0bf0d61, type: 2}
   bothTex:
     eyebrowManager: {fileID: 0}
     eyeManager: {fileID: 11400000, guid: 8c4bbdb5064544e42951596691ca6dc2, type: 2}
@@ -43,3 +45,4 @@ MonoBehaviour:
     handManager: {fileID: 11400000, guid: 8822a0eb80c769e4c8c432a8d01faa7f, type: 2}
     legManager: {fileID: 11400000, guid: 5e57e24b03cbc7845b000bf99b6b35db, type: 2}
     shoeManager: {fileID: 11400000, guid: a34ba9786cf885a4bb103416722d8540, type: 2}
+    hairManager: {fileID: 11400000, guid: f32a6a6dcd0e7f34887af69a76f2eb62, type: 2}

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "TextureManager", menuName = "Restaurant Manager/Texture/TextureManager", order = 0)]
+[CreateAssetMenu(fileName = "TextureManager", menuName = "ScriptableObject/HumanTex/TextureManager", order = 0)]
 public class TextureManager : ScriptableObject
 {
     public List<string> tetxuresName;

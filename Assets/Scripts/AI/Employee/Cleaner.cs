@@ -19,9 +19,8 @@ public class Cleaner : Employee
         data.gender = IdentityCreator.GetGender(70, 30);
         data.name = IdentityCreator.GetName(data.gender);
         data.age = IdentityCreator.GetAge();
-
-        data = (EmployeeData)IdentityCreator.GetRandomAppearance(data);
-        SetTex(data.skinTex, data.headTex, data.handTex, data.bodyTex, data.legTex);
+        data = (EmployeeData)AppearanceCreator.GetRandomAppearance(data);
+        SetTex(data as HumanData);
         
         data = EmployeeCreator.CreateStat(1, this, data);
         SetStat(typeof(EmployeeData), data);

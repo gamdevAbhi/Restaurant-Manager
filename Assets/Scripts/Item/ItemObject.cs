@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemObject", menuName = "Restaurant Manager/ItemObject", order = 0)]
+[CreateAssetMenu(fileName = "ItemObject", menuName = "ScriptableObject/Object", order = 0)]
 public class ItemObject : ScriptableObject
 {
     public string itemName;

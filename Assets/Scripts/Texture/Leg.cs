@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Leg", menuName = "Restaurant Manager/Texture/Leg", order = 0)]
+[CreateAssetMenu(fileName = "Leg", menuName = "ScriptableObject/HumanTex/Leg", order = 0)]
 public class Leg : ScriptableObject 
 {
     public string texName = "";

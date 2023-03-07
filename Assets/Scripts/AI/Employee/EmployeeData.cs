@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-
-public class EmployeeData : Data
+public class EmployeeData : HumanData
 {
     public uint speed;
     public uint cleaning;

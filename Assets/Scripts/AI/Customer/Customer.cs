@@ -127,7 +127,7 @@ public class Customer : Human
     {
         CustomerData data  = (CustomerData)Convert.ChangeType(newData, type);
 
-        SetInfo(data.name, data.age, data.gender);
+        SetInfo(data as HumanData);
 
         money = data.money;
     }

@@ -9,7 +9,6 @@ Shader "Custom/ClothShader"
         
         _ClothColor ("Cloth Color", Color) = (1,1,1,1)
         _ClothTypeColor ("Cloth Type Color", Color) = (1, 1, 1, 1)
-        _ClothPatternColor ("Cloth Pattern Color", Color) = (1, 1, 1, 1)
 
         _ClothType ("Is Cloth Type Texture Applied", Int) = 0
         _ClothPattern ("Is Cloth Pattern Texture Applied", Int) = 0
@@ -39,7 +38,6 @@ Shader "Custom/ClothShader"
 
         fixed4 _ClothColor;
         fixed4 _ClothTypeColor;
-        fixed4 _ClothPatternColor;
 
         int _ClothType;
         int _ClothPattern;
@@ -69,7 +67,7 @@ Shader "Custom/ClothShader"
             fixed4 finalOverlap = finalOverlap;
 
             if(_ClothType == 1) secondOverlap = overlapTex(firstOverlap, clothTypeTex, _ClothTypeColor);
-            if(_ClothPattern == 1) finalOverlap = overlapTex(secondOverlap, clothPatternTex, _ClothPatternColor);
+            if(_ClothPattern == 1) finalOverlap = overlapTex(secondOverlap, clothPatternTex, (1, 1, 1, 1));
 
             o.Albedo = finalOverlap.rgb;
             o.Alpha = 1;

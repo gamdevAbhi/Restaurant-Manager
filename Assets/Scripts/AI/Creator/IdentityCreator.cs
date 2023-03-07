@@ -20,8 +20,6 @@ public static class IdentityCreator
 
     public static string GetName(bool gender) 
     {
-        GetRandomAppearance(new EmployeeData());
-
         if(firstNamesMale == null) firstNamesMale = AssetToNames(maleFirstNameDir);
         if(firstNamesFemale == null) firstNamesFemale = AssetToNames(femaleFirstNameDir);
         if(surnames == null) surnames = AssetToNames(surnamesDir);
@@ -84,37 +82,5 @@ public static class IdentityCreator
         if(value <= youngAge) return (uint)rand.Next(17, 28);
         else if(value <= midAge) return (uint)rand.Next(28, 40);
         else return (uint)rand.Next(40, 60);
-    }
-// new
-    public static Data GetRandomAppearance(Data data)
-    {
-        List<string> availableTex = new List<string>();
-        System.Random rand = new System.Random();
-
-        AddTex(availableTex, "Skin", "Both");
-
-        if(data.gender)
-        {
-            AddTex(availableTex, "Skin", "Male");
-        }
-        else
-        {
-            AddTex(availableTex, "Skin", "Female");
-        }
-
-        HumanTex skinTex = Resources.Load<HumanTex>("Skin/" + availableTex[rand.Next(availableTex.Count)]);
-        data.skinTex = skinTex;
-        
-        return data;
-    }
-
-    private static void AddTex(List<string> texList, string partName, string fileName)
-    {
-        if(humanTexPath.ContainsKey(partName) == false) return;
-
-        foreach(string texName in AssetToNames(humanTexPath[partName] + fileName))
-        {
-            texList.Add(texName);
-        }
     }
 }

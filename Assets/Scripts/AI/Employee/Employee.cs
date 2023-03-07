@@ -36,7 +36,7 @@ public abstract class Employee : Human
     {
         EmployeeData data  = (EmployeeData)Convert.ChangeType(newData, type);
 
-        SetInfo(data.name, data.age, data.gender);
+        SetInfo(data as HumanData);
         
         speed = data.speed;
         cleaning = data.cleaning;

@@ -9,6 +9,7 @@ Shader "Custom/HandLegShader"
         _HandLegColor ("Cloth Color", Color) = (1,1,1,1)
         _HandLegPatternColor ("Hand Leg Pattern Color", Color) = (1, 1, 1, 1)
 
+        _HandLeg ("Is Hand Leg Texture Applied", Int) = 0
         _HandLegPattern ("Is Hand Leg Pattern Texture Applied", Int) = 0
     }
     SubShader
@@ -35,6 +36,7 @@ Shader "Custom/HandLegShader"
         fixed4 _HandLegColor;
         fixed4 _HandLegPatternColor;
 
+        int _HandLeg;
         int _HandLegPattern;
 
         UNITY_INSTANCING_BUFFER_START(Props)
@@ -54,9 +56,11 @@ Shader "Custom/HandLegShader"
         {
             fixed4 skinTex = tex2D (_SkinTex, IN.uvTex);
             fixed4 handLegTex = tex2D (_HandLegTex, IN.uv_HandLegTex);
-            fixed4 handLegPatternTex = tex2D (_HandLegPatternTex, IN.uv_HandLegPatternTex); 
+            fixed4 handLegPatternTex = tex2D (_HandLegPatternTex, IN.uv_HandLegPatternTex);
 
-            fixed4 firstOverlap = overlapTex(skinTex, handLegTex, _HandLegColor);
+            fixed4 firstOverlap = skinTex;
+            
+            if(_HandLeg == 1) firstOverlap = overlapTex(skinTex, handLegTex, _HandLegColor);
             fixed4 finalOverlap = firstOverlap;
             
             if(_HandLegPattern == 1) finalOverlap = overlapTex(firstOverlap, handLegPatternTex, _HandLegPatternColor);

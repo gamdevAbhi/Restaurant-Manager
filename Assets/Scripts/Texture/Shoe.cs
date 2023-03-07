@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Shoe", menuName = "Restaurant Manager/Texture/Shoe", order = 0)]
+[CreateAssetMenu(fileName = "Shoe", menuName = "ScriptableObject/HumanTex/Shoe", order = 0)]
 public class Shoe : ScriptableObject 
 {
     public string texName = "";

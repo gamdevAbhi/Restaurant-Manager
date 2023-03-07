@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ear", menuName = "Restaurant Manager/Texture/Ear", order = 0)]
+[CreateAssetMenu(fileName = "Ear", menuName = "ScriptableObject/HumanTex/Ear", order = 0)]
 public class Ear : ScriptableObject 
 {
     public string texName = "";

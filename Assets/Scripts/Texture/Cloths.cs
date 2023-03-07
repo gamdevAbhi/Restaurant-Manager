@@ -1,12 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Cloths", menuName = "Restaurant Manager/Texture/Cloth", order = 0)]
+[CreateAssetMenu(fileName = "Cloth", menuName = "ScriptableObject/HumanTex/Cloth", order = 0)]
 public class Cloths : ScriptableObject 
 {
     public string texName = "";
     public Texture texture;
     public Color[] color;
     public enum Gender {Male, Female, Both}
+    public bool extendedHand = true;
 
     public Instance[] clothType;
     public Texture[] clothPattern;
